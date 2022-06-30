@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gd.manage.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.gd.manage.entity.po.UserPO">
+        <id column="id" jdbcType="CHAR" property="id"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="salt" jdbcType="VARCHAR" property="salt"/>
+        <result column="mail" jdbcType="VARCHAR" property="mail"/>
+        <result column="login_time" jdbcType="TIMESTAMP" property="loginTime"/>
+        <result column="forbidden" jdbcType="CHAR" property="forbidden"/>
+        <result column="create_id" jdbcType="CHAR" property="createId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_id" jdbcType="CHAR" property="updateId"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, user_name, password, phone,salt, mail, login_time, forbidden, create_id, create_time,
+    update_id, update_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        where id = #{id,jdbcType=CHAR}
+    </select>
+    <select id="selectByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        where user_name = #{userName,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_user
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+    <insert id="insert" parameterType="com.gd.manage.entity.po.UserPO">
+    insert into sys_user (id, user_name, password, phone,
+      salt, mail, login_time, 
+      forbidden, create_id,
+      create_time, update_id, update_time
+      )
+    values (#{id,jdbcType=CHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},
+      #{salt,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, #{loginTime,jdbcType=TIMESTAMP}, 
+      #{forbidden,jdbcType=CHAR}, #{createId,jdbcType=CHAR},
+      #{createTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=CHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.gd.manage.entity.po.UserPO">
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="salt != null">
+                salt,
+            </if>
+            <if test="mail != null">
+                mail,
+            </if>
+            <if test="loginTime != null">
+                login_time,
+            </if>
+            <if test="forbidden != null">
+                forbidden,
+            </if>
+            <if test="createId != null">
+                create_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateId != null">
+                update_id,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=CHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="mail != null">
+                #{mail,jdbcType=VARCHAR},
+            </if>
+            <if test="loginTime != null">
+                #{loginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="forbidden != null">
+                #{forbidden,jdbcType=CHAR},
+            </if>
+            <if test="createId != null">
+                #{createId,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateId != null">
+                #{updateId,jdbcType=CHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gd.manage.entity.po.UserPO">
+        update sys_user
+        <set>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                salt = #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="mail != null">
+                mail = #{mail,jdbcType=VARCHAR},
+            </if>
+            <if test="loginTime != null">
+                login_time = #{loginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="forbidden != null">
+                forbidden = #{forbidden,jdbcType=CHAR},
+            </if>
+            <if test="createId != null">
+                create_id = #{createId,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateId != null">
+                update_id = #{updateId,jdbcType=CHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=CHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.gd.manage.entity.po.UserPO">
+    update sys_user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR},
+      login_time = #{loginTime,jdbcType=TIMESTAMP},
+      forbidden = #{forbidden,jdbcType=CHAR},
+      create_id = #{createId,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_id = #{updateId,jdbcType=CHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+    <select id="query" resultMap="BaseResultMap" parameterType="com.gd.manage.entity.query.UserQuery">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        sys_user
+        <where>
+            <if test="userName!=null and userName !=''">
+                and user_name = #{userName,jdbcType=VARCHAR}
+            </if>
+            <if test="phone!=null and phone!=''">
+                and phone LIKE concat('%', #{phone}, '%')
+            </if>
+            <if test="mail!=null and mail!=''">
+                and mail LIKE concat('%', #{mail}, '%')
+            </if>
+            <if test="forbidden!=null and forbidden!=''">
+                and forbidden = #{forbidden,jdbcType=CHAR}
+            </if>
+            <if test="loginTime != null and loginTime != ''">
+                and DATE_FORMAT(login_time,'%Y-%m-%d') = #{loginTime}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+</mapper>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gd.manage.mapper.PermissionMapper">
+  <resultMap id="BaseResultMap" type="com.gd.manage.entity.po.PermissionPO">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="permission_type" jdbcType="CHAR" property="permissionType" />
+    <result column="parent_id" jdbcType="CHAR" property="parentId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="sort" jdbcType="DECIMAL" property="sort" />
+    <result column="create_id" jdbcType="CHAR" property="createId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_id" jdbcType="CHAR" property="updateId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.gd.manage.entity.po.PermissionPO">
+    <result column="url" jdbcType="LONGVARCHAR" property="url" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, permission_type, parent_id, name, code, remarks, sort, create_id, create_time, 
+    update_id, update_time
+  </sql>
+  <sql id="Blob_Column_List">
+    url
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_permission
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_permission
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gd.manage.entity.po.PermissionPO">
+    insert into sys_permission (id, permission_type, parent_id, 
+      name, code, remarks, 
+      sort, create_id, create_time, 
+      update_id, update_time, url
+      )
+    values (#{id,jdbcType=CHAR}, #{permissionType,jdbcType=CHAR}, #{parentId,jdbcType=CHAR}, 
+      #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=DECIMAL}, #{createId,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateId,jdbcType=CHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{url,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gd.manage.entity.po.PermissionPO">
+    insert into sys_permission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="permissionType != null">
+        permission_type,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="createId != null">
+        create_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateId != null">
+        update_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="permissionType != null">
+        #{permissionType,jdbcType=CHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=DECIMAL},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null">
+        #{updateId,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gd.manage.entity.po.PermissionPO">
+    update sys_permission
+    <set>
+      <if test="permissionType != null">
+        permission_type = #{permissionType,jdbcType=CHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=DECIMAL},
+      </if>
+      <if test="createId != null">
+        create_id = #{createId,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null">
+        update_id = #{updateId,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gd.manage.entity.po.PermissionPO">
+    update sys_permission
+    set permission_type = #{permissionType,jdbcType=CHAR},
+      parent_id = #{parentId,jdbcType=CHAR},
+      name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=DECIMAL},
+      create_id = #{createId,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_id = #{updateId,jdbcType=CHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      url = #{url,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gd.manage.entity.po.PermissionPO">
+    update sys_permission
+    set permission_type = #{permissionType,jdbcType=CHAR},
+      parent_id = #{parentId,jdbcType=CHAR},
+      name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=DECIMAL},
+      create_id = #{createId,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_id = #{updateId,jdbcType=CHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <select id="queryByUserId" parameterType="java.lang.String" resultType="com.gd.manage.entity.po.PermissionPO">
+       select DISTINCT p.* from sys_permission p
+       INNER JOIN sys_role_permission rp
+       on p.id = rp.permission_id
+       INNER JOIN sys_role r
+       on rp.role_id = r.id
+       INNER JOIN sys_user_role ur
+       on r.id = ur.role_id
+       where ur.user_id = #{userId,jdbcType=CHAR}
+    </select>
+  <select id="query" resultMap="BaseResultMap" parameterType="com.gd.manage.entity.query.PermissionQuery">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM
+    sys_permission
+    <where>
+
+      <if test="permissionType!=null and permissionType !=''">
+        and permission_type = #{permissionType,jdbcType=VARCHAR}
+      </if>
+      <if test="parentId!=null and parentId !=''">
+        and parent_id = #{parentId,jdbcType=VARCHAR}
+      </if>
+      <if test="name!=null and name!=''">
+        and  name LIKE concat('%', #{name}, '%')
+      </if>
+      <if test="remarks!=null and remarks!=''">
+        and  remarks LIKE concat('%', #{remarks}, '%')
+      </if>
+      <if test="code!=null and code!=''">
+        and code = #{code,jdbcType=CHAR}
+      </if>
+    </where>
+    ORDER BY create_time DESC
+  </select>
+</mapper>

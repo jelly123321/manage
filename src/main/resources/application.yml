@@ -1,0 +1,25 @@
+server:
+  port: 8888   #  配置启动端口号
+  servlet:
+    context-path: /
+
+
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.1.210:3306/dev_device?relaxAutoCommitappDailyCheckServiceImpl=true&zeroDateTimeBehavior=convertToNull&characterEncoding=utf8&allowMultiQueries=true
+    username: root
+    password: fbzh1qaz2wsxDev
+    driverClassName: com.mysql.cj.jdbc.Driver
+
+
+#数据库配置
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: com.gd.manage.entity   #扫描实体类包/配置别名
+
+
+mapper:
+  wrapKeyword: '`{0}`'

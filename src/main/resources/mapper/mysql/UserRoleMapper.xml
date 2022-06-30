@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gd.manage.mapper.UserRoleMapper">
+  <resultMap id="BaseResultMap" type="com.gd.manage.entity.po.UserRolePO">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="user_id" jdbcType="CHAR" property="userId" />
+    <result column="role_id" jdbcType="CHAR" property="roleId" />
+    <result column="create_id" jdbcType="CHAR" property="createId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, role_id, create_id, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user_role
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_user_role
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByUserId" parameterType="java.lang.String">
+    delete from sys_user_role
+    where user_id = #{userId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gd.manage.entity.po.UserRolePO">
+    insert into sys_user_role (id, user_id, role_id, create_id, 
+      create_time)
+    values (#{id,jdbcType=CHAR}, #{userId,jdbcType=CHAR}, #{roleId,jdbcType=CHAR}, #{createId,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gd.manage.entity.po.UserRolePO">
+    insert into sys_user_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="createId != null">
+        create_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=CHAR},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=CHAR},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gd.manage.entity.po.UserRolePO">
+    update sys_user_role
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=CHAR},
+      </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=CHAR},
+      </if>
+      <if test="createId != null">
+        create_id = #{createId,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gd.manage.entity.po.UserRolePO">
+    update sys_user_role
+    set user_id = #{userId,jdbcType=CHAR},
+      role_id = #{roleId,jdbcType=CHAR},
+      create_id = #{createId,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <select id="query" resultMap="BaseResultMap" parameterType="com.gd.manage.entity.query.UserRoleQuery">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM
+    sys_user_role
+    <where>
+      <if test="userId!=null and userId !=''">
+        and user_id = #{userId,jdbcType=VARCHAR}
+      </if>
+      <if test="roleId!=null and roleId !=''">
+        and role_id = #{roleId,jdbcType=VARCHAR}
+      </if>
+    </where>
+    ORDER BY create_time DESC
+  </select>
+</mapper>
